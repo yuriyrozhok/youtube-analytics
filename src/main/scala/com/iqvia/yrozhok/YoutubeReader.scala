@@ -78,7 +78,6 @@ object YoutubeReader {
         |""".stripMargin
     )
      */
-    //.option("maxRecordsPerFile", 1000)
 
     /*
      * 77 MB of input JSON results in 1 MB of parquet
@@ -88,6 +87,7 @@ object YoutubeReader {
      * in that case we should repartition the dataframe into 10 partitions
      * and make sure they can be written in parallel (by setting executor cores and number of executors)
      * depending on the real data, we may distribute the file based on category
+     * for better size control, we can limit the number of records in the file by .option("maxRecordsPerFile", 100...)
      * */
     videos
       .repartition(col("category_id"))
