@@ -30,6 +30,7 @@ object Util {
     ("description", StringType)
   )
   val schema = StructType(columns.map(x => StructField(x._1, x._2, true)))
+  //schema is not used because input contains all columns as strings, even numbers
 
   val infSchema = StructType(
     Seq(
