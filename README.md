@@ -27,3 +27,6 @@ Assumes that you run it from the edge node, app JAR and keytab are also availabl
 this will produce new records in Hive tables:
 - yrozhok_usv_src - copy of the data from the source JSON
 - yrozhok_usv_trd - trending videos
+
+## screenshots
+see some screenshots with results in /img folder
