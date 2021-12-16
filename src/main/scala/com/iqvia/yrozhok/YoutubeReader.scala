@@ -124,7 +124,7 @@ object YoutubeReader {
         .mode(SaveMode.Append)
         .parquet("./output/USvideos.source")
     } else {
-      // appMode == "cluster"
+      // appMode == "cluster" - write into Hive table
       videos
         .select(targetCols.map(col): _*)
         .repartition(col("category_id"))
@@ -149,6 +149,15 @@ object YoutubeReader {
         .write
         .mode(SaveMode.Append)
         .parquet("./output/USvideos.trending")
+    } else {
+      // appMode == "cluster" - write into Hive table
+      trending
+        .select(targetCols.map(col): _*)
+        .repartition(col("category_id"))
+        .write
+        .format("parquet")
+        .mode(SaveMode.Append)
+        .insertInto("devl_de9_arz_batch.yrozhok_usv_trd")
     }
   }
 }
